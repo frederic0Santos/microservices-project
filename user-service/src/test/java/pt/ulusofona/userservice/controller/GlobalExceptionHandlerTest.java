@@ -2,6 +2,8 @@ package pt.ulusofona.userservice.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -51,6 +53,20 @@ class GlobalExceptionHandlerTest {
         assertNotNull(response.getBody());
         assertEquals("Nome é obrigatório", response.getBody().get("name"));
         assertEquals("Email deve ser válido", response.getBody().get("email"));
+        assertEquals("400", response.getBody().get("status"));
+    }
+
+    @ParameterizedTest(name = "handleRuntimeException message={0}")
+    @ValueSource(strings = {
+            "Utilizador não encontrado com ID: 1", "Utilizador não encontrado com ID: 2",
+            "Email já está em uso: a@a.com", "Email já está em uso: b@b.com",
+            "Error 1", "Error 2", "Error 3", "Not found 1", "Not found 2"
+    })
+    void handleRuntimeException_VariousMessages_Returns400WithMessage(String message) {
+        ResponseEntity<Map<String, String>> response = handler.handleRuntimeException(new RuntimeException(message));
+        assertNotNull(response);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals(message, response.getBody().get("message"));
         assertEquals("400", response.getBody().get("status"));
     }
 }
