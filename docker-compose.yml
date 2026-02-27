@@ -11,7 +11,7 @@ services:
     networks:
       - microservices-network
     healthcheck:
-      test: ["CMD", "bash", "-lc", "echo ruok | nc -w 2 localhost 2181 | grep imok"]
+      test: [ "CMD-SHELL", "bash -lc \"echo srvr > /dev/tcp/localhost/2181\"" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -28,16 +28,16 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
 
-      # Listener interno (para containers) e externo (para host)
+
       KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092"
       KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
 
-      # Single-node dev
+
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
 
-      # Menos "ruÃ­do" em labs
+
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     networks:

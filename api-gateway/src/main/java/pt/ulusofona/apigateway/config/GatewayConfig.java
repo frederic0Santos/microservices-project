@@ -72,19 +72,19 @@ public class GatewayConfig {
                 // Routes all requests matching /api/users/** to the User Service
                 .route("user-service", r -> r
                         .path("/api/users/**")
-                        .uri("http://localhost:8081"))
+                        .uri("http://user-service:8081"))
                 
                 // Product Service routes
                 // Routes all requests matching /api/products/** to the Product Service
                 .route("product-service", r -> r
                         .path("/api/products/**")
-                        .uri("http://localhost:8082"))
+                        .uri("http://product-service:8082"))
                 
                 // Order Service routes
                 // Routes all requests matching /api/orders/** to the Order Service
                 .route("order-service", r -> r
                         .path("/api/orders/**")
-                        .uri("http://localhost:8083"))
+                        .uri("http://order-service:8083"))
                 
                 .build();
     }

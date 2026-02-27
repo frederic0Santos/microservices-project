@@ -26,7 +26,7 @@ spring:
         format_sql: true
   
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: kafka:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -81,7 +81,7 @@ springdoc:
 # Service URLs (for Feign clients)
 services:
   user:
-    url: http://localhost:8081
+    url: http://user-service:8081
   product:
-    url: http://localhost:8082
+    url: http://product-service:8082
 
