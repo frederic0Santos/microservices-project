@@ -12,7 +12,7 @@ This project serves as a **base template** for developing microservices in Java 
 **Note:** Students must implement Dockerfiles and complete `docker-compose.yml` as part of Week 2 (see course materials).
 
 ## Project Overview
-
+]ola
 This is a microservices-based application demonstrating a modern cloud-native architecture. The project consists of four main services:
 
 1. **API Gateway** - Single entry point for all client requests using Spring Cloud Gateway
@@ -625,3 +625,4 @@ This project is for educational purposes.
 - [Spring Data JPA Documentation](https://spring.io/projects/spring-data-jpa)
 - [Microservices Patterns](https://microservices.io/patterns/)
 - [Course Materials](Aulas/README.md)
+
